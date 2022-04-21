@@ -1,4 +1,4 @@
-# nodejs graphql sql database
+# nodejs - graphql - sql database
 
 ## Init
 
@@ -10,8 +10,7 @@
 
 ## Run
 
-`yarn build`
-`yarn start`
-
+`yarn build`  
+`yarn start`  
 
 App deployed at http://localhost:8080
