@@ -14,3 +14,8 @@
 `yarn start`  
 
 App deployed at http://localhost:8080
+
+## Test
+
+Hello Wolrd : `{ hello }`  
+Player : `{ player { lastName } }`  
