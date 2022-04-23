@@ -2,20 +2,16 @@
 import express, {Request, Response} from "express";
 
 import { graphqlHTTP } from "express-graphql";
+import config from "./config";
+import database from "./database";
 
 import schema from "./schema";
 
 const app = express();
-const PORT = 8080;
 
 app.get("/", (_: Request, resp: Response) => {
     resp.send("Hello world");
 });
-
-app.listen(PORT, () => {
-    console.log("Graphql server up and running on port " + PORT)
-});
-
 
 //graphql playground setup code
 app.use(
@@ -26,3 +22,28 @@ app.use(
     })
 );
 
+async function start(): Promise<void> {
+    try {
+        // check database connection
+        await database.raw('SELECT 1 + 1 AS result');
+
+        await database.schema.createTableIfNotExists('players', (table) => {
+            table.string('firstName');
+            table.string('lastName');
+            table.integer('id').notNullable().defaultTo(0);
+        }).then(function () {
+            return database("players").insert([
+                {id: 0, firstName: "Eti", lastName: "DA"}
+            ])
+        });
+
+        app.listen(config.port, () => {
+            console.log(`Server started at http://localhost:${config.port}`);
+        });
+    } catch (error) {
+        console.error(error)
+        process.exit(1);
+    }
+}
+  
+start();

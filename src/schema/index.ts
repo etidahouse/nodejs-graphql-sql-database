@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import player from './queries/players';
 import hello from './queries/hello';
+import player from './queries/player';
 
 const query = new GraphQLObjectType({
     name: 'Query',
