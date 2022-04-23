@@ -1,7 +1,8 @@
 import { GraphQLID, GraphQLNonNull } from 'graphql';
-import { get } from 'src/dao/player';
 import { Player } from 'src/types/player';
 import { default as playerType } from '../types/player';
+import context from '../../context';
+
 
 const player = {
     type: playerType,
@@ -16,8 +17,8 @@ const player = {
         lastname: "Doe",
         firstname: "John",
       };*/
-      return get(args.id);
-      //return context.repositories.player.get(args.id);
+      //return get(args.id);
+      return context.repositories.player.get(args.id);
   },
 };
 

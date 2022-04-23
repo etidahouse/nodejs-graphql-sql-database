@@ -21,14 +21,14 @@ const player = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'Last name of the player',
       resolve: (p: Player): string => {
-        return p.lastname;
+        return p.lastName;
       }
     },
     firstName: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'First name of the player',
       resolve: (p: Player): string => {
-        return p.firstname;
+        return p.firstName;
       },
     }
   })

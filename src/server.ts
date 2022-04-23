@@ -3,7 +3,7 @@ import express, {Request, Response} from "express";
 
 import { graphqlHTTP } from "express-graphql";
 import config from "./config";
-import database from "./database";
+import { database } from "./database";
 
 import schema from "./schema";
 
@@ -27,7 +27,7 @@ async function start(): Promise<void> {
         // check database connection
         await database.raw('SELECT 1 + 1 AS result');
 
-        await database.schema.createTableIfNotExists('players', (table) => {
+        await database.schema.createTableIfNotExists('players', (table: any) => {
             table.string('firstName');
             table.string('lastName');
             table.integer('id').notNullable().defaultTo(0);

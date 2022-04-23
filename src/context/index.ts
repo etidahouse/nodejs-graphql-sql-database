@@ -1,4 +1,4 @@
-import PlayerKnexRepository from 'src/repositories/player-repository-knex';
+import PlayerKnexRepository from '../dao/player';
 import Context from './context';
 
 const context: Context = {

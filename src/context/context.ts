@@ -1,4 +1,4 @@
-import PlayerRepository from "src/repositories/player-repository";
+import PlayerRepository from "../repositories/player-repository";
 
 interface RepositoriesContext {
     player: PlayerRepository;
