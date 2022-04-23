@@ -5,14 +5,14 @@
 `npm init -y`  
 `yarn add express express-graphql graphql`  
 `yarn add @types/express @types/express-graphql @types/graphql nodemon -D`  
-`npx tsconfig.json`
+`npx tsconfig.json`  
 `sudo npm install typescript -g`
 
-typeorm and postgresql:  
-`yarn add typeorm reflect-metadata pg`
+knex :  
+`yarn add knex pg`
 
 dotenv:  
-yarn add dotenv
+`yarn add dotenv`
 
 ## Run
 
@@ -22,9 +22,13 @@ yarn add dotenv
 `yarn build`  
 `yarn start`  
 
-App deployed at http://localhost:8080
+App deployed at http://localhost:3010
+
+Watch database :  
+`docker run --name pgadmin -d -p 5050:5050 thajeztah/pgadmin4`
 
 ## Test
 
 Hello Wolrd : `{ hello }`  
 Player : `{ player { lastName } }`  
+Get an player `{player(id: 1) {lastName}}`
