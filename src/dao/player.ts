@@ -14,8 +14,7 @@ export default class PlayerKnexRepository implements PlayerRepository {
     }
 
     public async getAll(): Promise<Player[]> {
-        const players = await database<Player>("players").select();
-        return players;
+        return await database<Player>("players").select();;
     }
     create(_params: CreateParameters): Promise<Player> {
         throw new Error("Method not implemented.");
