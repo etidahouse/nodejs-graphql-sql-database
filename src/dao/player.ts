@@ -13,8 +13,9 @@ export default class PlayerKnexRepository implements PlayerRepository {
         }       
     }
 
-    getMany(_ids: number[]): Promise<Player[]> {
-        throw new Error("Method not implemented.");
+    public async getAll(): Promise<Player[]> {
+        const players = await database<Player>("players").select();
+        return players;
     }
     create(_params: CreateParameters): Promise<Player> {
         throw new Error("Method not implemented.");
@@ -22,12 +23,46 @@ export default class PlayerKnexRepository implements PlayerRepository {
     update(_id: number, _firstName: string, _lastName: string): Promise<Player> {
         throw new Error("Method not implemented.");
     }
-    find(_params: FindParameters): Promise<Player[]> {
-        throw new Error("Method not implemented.");
+    
+    public async find(params: FindParameters): Promise<Player[]> {
+        
+        const { firstName, lastName } = params;
+
+        return await database.select()
+          .from('players')
+          .modify((queryBuilder) => {
+            
+            if (typeof firstName !== 'undefined' && firstName !== null) {
+              queryBuilder.where('firstName', 'like', `%${firstName}%`);
+            }
+    
+            if (typeof lastName !== 'undefined' && lastName !== null) {
+              queryBuilder.where('lastName', 'like', `%${lastName}%`);
+            }
+    
+        });        
+        
     }
-    count(_params: CountParameters): Promise<number> {
-        throw new Error("Method not implemented.");
+
+    public async count(params: CountParameters): Promise<number> {
+
+        const { firstName, lastName } = params;
+
+        return await database.count({ count: '*' })
+            .from('players')
+            .modify((queryBuilder) => {
+                if (typeof firstName !== 'undefined' && firstName !== null) {
+                    queryBuilder.where('firstName', 'like', `%${firstName}%`);
+                }
+
+                if (typeof lastName !== 'undefined' && lastName !== null) {
+                    queryBuilder.where('lastName', 'like', `%${lastName}%`);
+                }
+            })
+            .first()
+            .then(result => result.count);
     }
+
     delete(_id: number): Promise<Player> {
         throw new Error("Method not implemented.");
     } 
