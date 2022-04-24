@@ -6,6 +6,7 @@ import config from "./config";
 import { database } from "./database";
 
 import schema from "./schema";
+import { Player } from "./types/player";
 
 const app = express();
 
@@ -27,18 +28,33 @@ async function start(): Promise<void> {
         // check database connection
         await database.raw('SELECT 1 + 1 AS result');
 
-        await database.schema.createTableIfNotExists('players', (table: any) => {
-            table.string('firstName');
-            table.string('lastName');
-            table.integer('id').notNullable().defaultTo(0);
-        }).then(function () {
-            return database("players").insert([
-                {id: 0, firstName: "Eti", lastName: "DA"}
-            ])
-        });
+        await database.schema.hasTable('players')
+            .then(exist => {
+                if(!exist) {
+                    database.schema.createTable('players', (table: any) => {
+                        table.string('firstName');
+                        table.string('lastName');
+                        table.integer('id').notNullable().defaultTo(0);
+                    }).then(function () {
+                        return database("players").insert([
+                            {id: 0, firstName: "Eti", lastName: "DA"}
+                        ]);
+                    });            
+                } else {
+                    database<Player>("players").select().then(players => {
+                        if (players.length === 0) {
+                            return database("players").insert([
+                                {id: 0, firstName: "Eti", lastName: "DA"}
+                            ]);
+                        } else {
+                            return;
+                        }
+                    })
+                }
+            });
 
         app.listen(config.port, () => {
-            console.log(`Server started at http://localhost:${config.port}`);
+            console.info(`Server started at http://localhost:${config.port}`);
         });
     } catch (error) {
         console.error(error)
