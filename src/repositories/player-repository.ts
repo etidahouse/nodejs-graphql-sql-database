@@ -1,4 +1,3 @@
-import { OrderBy } from "src/types/order-by";
 import { Player } from "src/types/player";
 
 export interface CreateParameters {
@@ -7,11 +6,8 @@ export interface CreateParameters {
   }
   
   export interface FindParameters {
-    first: number;
-    after?: number;
     firstName?: string;
     lastName?: string;
-    orderBy?: OrderBy[];
   }
   
   export interface CountParameters {
@@ -22,7 +18,7 @@ export interface CreateParameters {
   export default interface PlayerRepository {
     get(id: number): Promise<Player>;
   
-    getMany(ids: number[]): Promise<Player[]>;
+    getAll(): Promise<Player[]>;
   
     create(params: CreateParameters): Promise<Player>;
   
