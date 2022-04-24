@@ -3,7 +3,6 @@ import { Player } from 'src/types/player';
 import { default as playerType } from '../types/player';
 import context from '../../context';
 
-
 const player = {
     type: playerType,
     args: {
@@ -12,12 +11,6 @@ const player = {
         },
       },
     resolve: (_: any, args: Player): Promise<Player | null> => {
-      /*return {
-        id: id,
-        lastname: "Doe",
-        firstname: "John",
-      };*/
-      //return get(args.id);
       return context.repositories.player.get(args.id);
   },
 };
