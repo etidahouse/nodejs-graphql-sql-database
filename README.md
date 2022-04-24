@@ -30,5 +30,7 @@ Watch database :
 ## Test
 
 Hello Wolrd : `{ hello }`  
-Player : `{ player { lastName } }`  
-Get an player `{player(id: 1) {lastName}}`
+Players : `{ players { firstName } }`  
+Get an player `{player(id: 0) {id, firstName, lastName}}`
+Find an player `{find(firstName: "Eti") {lastName}}`
+Count an player name : `{count(firstName: "Eti")}`
