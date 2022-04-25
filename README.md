@@ -30,7 +30,10 @@ Watch database :
 ## Test
 
 Hello Wolrd : `{ hello }`  
-Players : `{ players { firstName } }`  
-Get an player `{player(id: 0) {id, firstName, lastName}}`
-Find an player `{find(firstName: "Eti") {lastName}}`
-Count an player name : `{count(firstName: "Eti")}`
+Players : `{ players { id, firstName, lastName } }`  
+Get an player `{player(id: 0) {id, firstName, lastName}}`  
+Find an player `{find(firstName: "Eti") {lastName}}`  
+Count an player name : `{count(firstName: "Eti")}`  
+Add an player : `mutation { createPlayer(newPlayer:{firstName: "Eric", lastName: "JC"}) {
+  id, lastName
+} }`  
