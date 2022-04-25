@@ -1,6 +1,5 @@
 
 import { GraphQLNonNull } from 'graphql';
-//import { CreateParameters } from 'src/repositories/player-repository';
 import newPlayer from '../../types/input/new-player';
 import { Player } from '../../types/player';
 import context from '../../context';
