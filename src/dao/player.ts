@@ -2,7 +2,7 @@ import { database } from "../database";
 import { Player } from "src/types/player";
 import PlayerRepository, { CountParameters, CreateParameters, FindParameters } from "../repositories/player-repository";
 
-export default class PlayerKnexRepository implements PlayerRepository {
+export default class PlayerKnexDao implements PlayerRepository {
 
     public async get(id: number): Promise<Player> {
         const player = await database<Player>("players").select("*").where({id}).first();
