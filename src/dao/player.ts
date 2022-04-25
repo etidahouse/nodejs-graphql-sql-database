@@ -16,12 +16,6 @@ export default class PlayerKnexDao implements PlayerRepository {
     public async getAll(): Promise<Player[]> {
         return await database<Player>("players").select();
     }
-    create(_params: CreateParameters): Promise<Player> {
-        throw new Error("Method not implemented.");
-    }
-    update(_id: number, _firstName: string, _lastName: string): Promise<Player> {
-        throw new Error("Method not implemented.");
-    }
     
     public async find(params: FindParameters): Promise<Player[]> {
         
@@ -60,6 +54,23 @@ export default class PlayerKnexDao implements PlayerRepository {
             })
             .first()
             .then(result => result.count);
+    }
+
+    public async create(params: CreateParameters): Promise<Player> {
+
+        return await database.returning("id")
+            .insert({
+                firstName: params.firstName,
+                lastName: params.lastName,
+            })
+            .into('players')
+            .then(ids => {
+                return this.get(ids[0].id);
+            });
+    }
+
+    update(_id: number, _firstName: string, _lastName: string): Promise<Player> {
+        throw new Error("Method not implemented.");
     }
 
     delete(_id: number): Promise<Player> {
