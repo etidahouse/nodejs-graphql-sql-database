@@ -34,6 +34,5 @@ Players : `{ players { id, firstName, lastName } }`
 Get an player `{player(id: 0) {id, firstName, lastName}}`  
 Find an player `{find(firstName: "Eti") {lastName}}`  
 Count an player name : `{count(firstName: "Eti")}`  
-Add an player : `mutation { createPlayer(newPlayer:{firstName: "Eric", lastName: "JC"}) {
-  id, lastName
-} }`  
+Add an player : `mutation { createPlayer(newPlayer:{firstName: "Eric", lastName: "JC"}) { id, lastName } }`  
+Update an player : `mutation { updatePlayer(player:{firstName: "Eti", lastName: "HOUSE", id: 0}) { id, lastName, firstName } }`

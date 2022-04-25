@@ -69,8 +69,26 @@ export default class PlayerKnexDao implements PlayerRepository {
             });
     }
 
-    update(_id: number, _firstName: string, _lastName: string): Promise<Player> {
-        throw new Error("Method not implemented.");
+    public async update(player: Player): Promise<Player> {
+        return await database.table('players')
+            .where('id', player.id)
+            .modify((queryBuilder) => {
+                if (typeof player.firstName !== 'undefined' && player.firstName !== null) {
+                    queryBuilder.update('firstName', player.firstName);
+                }
+
+                if (typeof player.lastName !== 'undefined' && player.lastName !== null) {
+                    queryBuilder.update('lastName', player.lastName);
+                }
+            })
+            .then(updatedRows => {
+                if (updatedRows.length === 0) {
+                    throw new Error('Player not found!');
+                }
+                return updatedRows;
+            }).then(() => {
+                return this.get(player.id);
+            });
     }
 
     delete(_id: number): Promise<Player> {

@@ -22,7 +22,7 @@ export interface CreateParameters {
   
     create(params: CreateParameters): Promise<Player>;
   
-    update(id: number, firstName: string, lastName: string): Promise<Player>;
+    update(player: Player): Promise<Player>;
   
     find(params: FindParameters): Promise<Player[]>;
   
