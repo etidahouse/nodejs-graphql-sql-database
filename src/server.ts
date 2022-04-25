@@ -34,7 +34,7 @@ async function start(): Promise<void> {
                     database.schema.createTable('players', (table: any) => {
                         table.string('firstName');
                         table.string('lastName');
-                        table.integer('id').notNullable().defaultTo(0);
+                        table.increments(); // auto increment
                     }).then(function () {
                         return database("players").insert([
                             {id: 0, firstName: "Eti", lastName: "DA"}
