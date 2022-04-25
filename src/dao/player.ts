@@ -91,8 +91,9 @@ export default class PlayerKnexDao implements PlayerRepository {
             });
     }
 
-    delete(_id: number): Promise<Player> {
-        throw new Error("Method not implemented.");
+    public async delete(id: number): Promise<void> {
+        await this.get(id);
+        await database.table('players').where('id', id).del();
     } 
     
 }

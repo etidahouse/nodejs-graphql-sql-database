@@ -28,5 +28,5 @@ export interface CreateParameters {
   
     count(params: CountParameters): Promise<number>;
   
-    delete(id: number): Promise<Player>;
+    delete(id: number): Promise<void>;
   }
