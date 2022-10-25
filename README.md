@@ -8,11 +8,11 @@ yarn add @types/express @types/express-graphql @types/graphql nodemon -D
 npx tsconfig.json
 sudo npm install typescript -g
 ```
-knex :  
-`yarn add knex pg`
-
-dotenv:  
-`yarn add dotenv`
+Dependencies :  
+```bash
+yarn add knex pg
+yarn add dotenv
+```
 
 ## Run
 
